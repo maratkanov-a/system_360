@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'core',
     'marks',
     'interview'
@@ -127,4 +128,14 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'core', 'static')
 STATIC_URL = '/static/'
+
+### CELERY ###
+
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+BROKER_URL = 'redis://localhost:6379/2'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYD_TASK_TIME_LIMIT = 600
+CELERY_SEND_TASK_ERROR_EMAILS = True
+
+### CELERY ###
 
